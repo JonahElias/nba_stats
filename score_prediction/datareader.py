@@ -1,11 +1,11 @@
 from json import load
+from time import sleep
 
 
 class DataReader:
 
     def __init__(self, file="score_prediction/team_one.json"):
         self.file = file
-
 
     def readbasicdict(self, dictionary, key=""):
         # prints out nba_api dict formatted with headers and data
@@ -54,7 +54,7 @@ class DataReader:
                 try:
                     d = d[player]
                     value = d[key]
-                    print(value)
+                    print(key + " = " + str(value))
                 except:
                     print("there was a problem")
 
@@ -66,6 +66,7 @@ class DataReader:
                     print(player + "\n" + ("-" * len(player)) + "\n")
                     for i in d:
                         print(i + " = " + str(d[i]))
+
                 except:
                     print("there was a problem")
         else:
