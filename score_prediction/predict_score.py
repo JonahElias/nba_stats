@@ -1,7 +1,7 @@
 from score_prediction.datareader import DataReader
 
 
-def pare(d, length=10,):
+def pare(d, length=10, ):
     dic = {}
     count = 1
     for i in d:
@@ -17,7 +17,9 @@ def two_pt_pct(datareader, player):
     fgm = datareader.return_json_data(player=player, key="FGM")
     fg3a = datareader.return_json_data(player=player, key="FG3A")
     fg3m = datareader.return_json_data(player=player, key="FG3M")
-    pct =  (fgm - fg3m) / (fga - fg3a)
+    if fga - fg3a == 0:
+        return 0
+    pct = (fgm - fg3m) / (fga - fg3a)
     return round(pct, 3)
 
 
@@ -28,8 +30,5 @@ def weighted_avg(player, fg2w=.35):
     fg3 = datareader.return_json_data(player=player, key="FG3_PCT")
     fg2 = two_pt_pct(datareader, player)
     w_avg = (fg2 * fg2w) + (fg3 * fg3w)
-    print(player)
-    print(w_avg)
-
-
+    return w_avg
 

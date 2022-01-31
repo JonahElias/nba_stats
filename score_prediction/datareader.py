@@ -4,7 +4,7 @@ from time import sleep
 
 class DataReader:
 
-    def __init__(self, file="score_prediction/team_one.json"):
+    def __init__(self, file="team_data/team_one.json"):
         self.file = file
 
     def readbasicdict(self, dictionary, key=""):
@@ -116,6 +116,14 @@ class DataReader:
             data = DataReader().return_json_data(player=player, key=key)
             d[player] = data
 
+        sorted_dict = {}
+        sorted_keys = sorted(d, key=d.get)
+        sorted_keys = list(reversed(sorted_keys))
+        for w in sorted_keys:
+            sorted_dict[w] = d[w]
+        return sorted_dict
+
+    def sort_dict(self, d):
         sorted_dict = {}
         sorted_keys = sorted(d, key=d.get)
         sorted_keys = list(reversed(sorted_keys))

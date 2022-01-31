@@ -63,7 +63,7 @@ def prep_dict(team_name):
     return d
 
 
-def write_file(team_name, file_n="score_prediction/team_one.json"):
+def write_file(team_name, file_n="team_data/team_one.json"):
     d = prep_dict(team_name)
     print("writing file")
     file = open(file_n, "w")

@@ -18,14 +18,14 @@ class Interface:
 
     def write_file(self):
         team = input("enter team name: ")
-        file_path = input("enter file path (default is 'score_prediction/team_one.json'): ")
-        try:
-            if file_path == "":
-                write_file(team)
-            else:
-                write_file(team, file_n=file_path)
-        except:
-            print("there was an error")
+        name = input("enter file name (default is 'team_one.json'): ")
+        file_path = "team_data/" + name
+
+        if name == "":
+            write_file(team)
+        else:
+            write_file(team, file_n=file_path)
+
 
     def readjson(self):
         dr = DataReader()
