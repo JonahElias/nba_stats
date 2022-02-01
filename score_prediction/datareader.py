@@ -4,8 +4,8 @@ from time import sleep
 
 class DataReader:
 
-    def __init__(self, file="team_data/team_one.json"):
-        self.file = file
+    def __init__(self, filen="team_data/team_one.json"):
+        self.file = filen
 
     def readbasicdict(self, dictionary, key=""):
         # prints out nba_api dict formatted with headers and data
@@ -82,6 +82,7 @@ class DataReader:
         # optional param key returns value from given player and key
         file = open(self.file, "r")
         d = load(file)
+        file.close()
         team = []
         for i in d:
             team.append(i)
@@ -110,17 +111,17 @@ class DataReader:
 
     def get_sorted_dict(self, key):
         # Returns a dict with {player_name : data} format from high to low
-        dic = DataReader().return_json_data()
+        dic = self.return_json_data()
         d = {}
         for player in dic:
-            data = DataReader().return_json_data(player=player, key=key)
+            data = self.return_json_data(player=player, key=key)
             d[player] = data
-
         sorted_dict = {}
         sorted_keys = sorted(d, key=d.get)
         sorted_keys = list(reversed(sorted_keys))
         for w in sorted_keys:
             sorted_dict[w] = d[w]
+
         return sorted_dict
 
     def sort_dict(self, d):

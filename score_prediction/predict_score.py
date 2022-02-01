@@ -32,3 +32,53 @@ def weighted_avg(player, fg2w=.35):
     w_avg = (fg2 * fg2w) + (fg3 * fg3w)
     return w_avg
 
+def base_score():
+    d = DataReader().get_sorted_dict("FGA")
+    d = pare(d, 10)
+    t = 0
+    for x in d:
+        pts = DataReader().return_json_data(x, "PTS")
+        pts = pts / 10
+        t += pts
+    t = round(t)
+    return t
+
+
+def base_score_v2():
+    t = 0
+    new = {}
+    datareader = DataReader()
+    d = datareader.get_sorted_dict("FGA")
+    d = pare(d, 10)
+    for x in d:
+        new[x] = two_pt_pct(datareader, x)
+    for x in new:
+        pct = new[x]
+        fga = d[x]
+        t += pct * fga * 2.5
+    t = round(t / 10)
+    return t
+
+def get_avg(d):
+    total = 0
+    count = 0
+    for x in d:
+        total += d[x]
+        count += 1
+    return total / count
+
+def get_adj_factor():
+    blks = DataReader("team_data/team_two.json").get_sorted_dict("BLK")
+    turnovers = DataReader().get_sorted_dict("TOV")
+    total_turnovers = get_avg(turnovers)
+    total_blks = get_avg(blks)
+    total_blks = total_blks * .66
+    return round(total_turnovers + total_blks)
+
+def score():
+    base_one = base_score()
+    base_two = base_score_v2()
+    score = (base_one + base_two) / 2
+    adj = get_adj_factor()
+    score = score - (adj * .8)
+    return round(score)
