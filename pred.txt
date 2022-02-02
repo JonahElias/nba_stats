@@ -1,2 +1,0 @@
-warriors : 109
-jazz : 123

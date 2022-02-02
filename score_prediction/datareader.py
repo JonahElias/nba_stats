@@ -131,3 +131,12 @@ class DataReader:
         for w in sorted_keys:
             sorted_dict[w] = d[w]
         return sorted_dict
+
+    def get_team_name(self):
+        file = open(self.file, "r")
+        d = load(file)
+        file.close()
+        team = []
+        for i in d:
+            team.append(i)
+        return team[0]
