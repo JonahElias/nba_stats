@@ -18,13 +18,19 @@ class Interface:
 
     def write_file(self):
         team = input("enter team name: ")
-        name = input("enter file name (default is 'team_one.json'): ")
-        file_path = "team_data/" + name
+        file = input("enter save file (enter 1 or 2, default is 1): ")
+        if file not in ["1", "2"]:
+            file = "1"
 
-        if name == "":
-            write_file(team)
+        if file == "1":
+            file_path = "team_data/" + "team_one.json"
+            write_file(team, file_path)
         else:
-            write_file(team, file_n=file_path)
+            file_path = "team_data/" + "team_two.json"
+            write_file(team, file_path)
+
+
+
 
 
     def readjson(self):

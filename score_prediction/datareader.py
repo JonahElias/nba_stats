@@ -1,4 +1,4 @@
-from json import load
+from json import load, dump
 from time import sleep
 
 
@@ -132,11 +132,19 @@ class DataReader:
             sorted_dict[w] = d[w]
         return sorted_dict
 
-    def get_team_name(self):
+    def get_full_dict(self):
         file = open(self.file, "r")
         d = load(file)
         file.close()
-        team = []
-        for i in d:
-            team.append(i)
-        return team[0]
+        return d
+
+    def write_data(self, data, file):
+        filo = open(file, "w")
+        dump(data, filo)
+        filo.close()
+
+    def read_data(self, file):
+        filo = open(file, "r")
+        data = load(filo)
+        filo.close()
+        return data

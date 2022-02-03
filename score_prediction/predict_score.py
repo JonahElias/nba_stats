@@ -1,6 +1,13 @@
 from score_prediction.datareader import DataReader
 
 
+def get_team_name(d):
+    team = []
+    for i in d:
+        team.append(i)
+    return team[0]
+
+
 def pare(d, length=10, ):
     dic = {}
     count = 1
@@ -31,6 +38,7 @@ def weighted_avg(datareader, player, fg2w=.35):
     w_avg = (fg2 * fg2w) + (fg3 * fg3w)
     return w_avg
 
+
 def base_score(datareader):
     d = datareader.get_sorted_dict("FGA")
     d = pare(d, 10)
@@ -57,6 +65,7 @@ def base_score_v2(datareader):
     t = round(t / 10)
     return t
 
+
 def get_avg(d):
     total = 0
     count = 0
@@ -64,6 +73,7 @@ def get_avg(d):
         total += d[x]
         count += 1
     return total / count
+
 
 def get_adj_factor(datareader):
     if datareader.file == "team_data/team_two.json":
@@ -75,6 +85,7 @@ def get_adj_factor(datareader):
     total_blks = get_avg(blks)
     total_blks = total_blks * .66
     return round(total_turnovers + total_blks)
+
 
 def score(datareader):
     base_one = base_score(datareader)
@@ -91,5 +102,6 @@ def predict(team_one):
     else:
         datareader = DataReader("team_data/team_two.json")
     scr = score(datareader)
-    name = datareader.get_team_name()
-    return {name : scr}
+    d = datareader.get_full_dict()
+    name = get_team_name(d)
+    return {name: scr}
