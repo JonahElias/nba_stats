@@ -29,10 +29,6 @@ class Interface:
             file_path = "team_data/" + "team_two.json"
             write_file(team, file_path)
 
-
-
-
-
     def readjson(self):
         dr = DataReader()
         player = input("enter player name (optional): ").title()

@@ -1,6 +1,0 @@
-{
-  "GROUP_SET": "Last 5 Games",
-  "DATE": "2.3.2022",
-  "KINGS": 124,
-  "WARRIORS": 116
-}
