@@ -1,3 +1,4 @@
+import subprocess
 from score_prediction.write_json import write_file
 from score_prediction.datareader import DataReader
 
@@ -10,11 +11,14 @@ class Interface:
             self.process_cmd(cmd)
 
     def process_cmd(self, cmd):
-        if cmd == "writefile":
+        if cmd == "write_file":
             self.write_file()
 
-        elif cmd == "readjson":
+        elif cmd == "read_json":
             self.readjson()
+
+        elif cmd == "run_tests":
+            self.run_tests()
 
     def write_file(self):
         team = input("enter team name: ")
@@ -46,3 +50,6 @@ class Interface:
         except:
             print("there was an error")
         print("\n")
+
+    def run_tests(self):
+        subprocess.call(["sh", "./testing/run_tests.sh"])

@@ -33,7 +33,7 @@ def write_prediction(team_one, team_two):
     DataReader().write_data(final, "prediction.json")
 
 
-def read_prediction():
-    dic = DataReader().read_data("prediction.json")
+def read_prediction(file="prediction.json"):
+    dic = DataReader().read_data(file)
     for i in dic:
         print(i + " = " + str(dic[i]))
