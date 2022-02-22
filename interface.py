@@ -1,24 +1,36 @@
 import subprocess
 from score_prediction.write_json import write_file
 from score_prediction.datareader import DataReader
+from score_prediction import predict_score, handle
 
 
 class Interface:
 
-    def run(self):
+    def run(self, c=""):
         while True:
-            cmd = input("enter command: ")
-            self.process_cmd(cmd)
+            print()
+            if c != "":
+                self.process_cmd(c)
+            else:
+                cmd = input("enter command (enter 'help' to view list of commands): ")
+                self.process_cmd(cmd)
 
     def process_cmd(self, cmd):
         if cmd == "write_file":
             self.write_file()
 
-        elif cmd == "read_json":
-            self.readjson()
-
         elif cmd == "run_tests":
             self.run_tests()
+
+        elif cmd == "help":
+            self.print_cmds()
+        elif cmd == "write_prediction":
+            self.write_prediction()
+        elif cmd == "read_prediction":
+            print()
+            handle.read_prediction()
+        else:
+            print("command not found")
 
     def write_file(self):
         team = input("enter team name: ")
@@ -33,23 +45,19 @@ class Interface:
             file_path = "team_data/" + "team_two.json"
             write_file(team, file_path)
 
-    def readjson(self):
-        dr = DataReader()
-        player = input("enter player name (optional): ").title()
-
-        try:
-            if player != "":
-                key = input("enter key (optional): ").upper()
-                if key != "":
-                    dr.read_json(player, key)
-                else:
-                    dr.read_json(player)
-            else:
-                dr.read_json()
-
-        except:
-            print("there was an error")
-        print("\n")
-
     def run_tests(self):
         subprocess.call(["sh", "./testing/run_tests.sh"])
+
+    def print_cmds(self):
+        print()
+        d = DataReader().read_data("program_info.json")
+        cmds = d["commands"]
+        for x in cmds:
+            print(x + " - " + cmds[x])
+        print()
+
+    def write_prediction(self):
+        score_one = predict_score.predict(True)
+        score_two = predict_score.predict(False)
+        handle.write_prediction(score_one, score_two)
+        print("complete")

@@ -54,7 +54,7 @@ def get_prediction_dict(b):
     date = get_date(d)
     final["GROUP_SET"] = dataset
     final["DATE"] = date
-    final["INDEPENDENT VARIABLE"] = b
+    final["VARIABLE"] = b
     return final
 
 

@@ -1,7 +1,7 @@
 {
   "GROUP_SET": "Last 10 Games",
-  "DATE": "2.10.2022",
-  "INDEPENDENT VARIABLE": "base_score_one",
-  "warriors": 110,
-  "lakers": 118
+  "DATE": "2.17.2022",
+  "VARIABLE": "base_score_one",
+  "warriors": 114,
+  "trail blazers": 122
 }
