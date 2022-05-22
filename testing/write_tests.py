@@ -60,7 +60,7 @@ def get_prediction_dict(b):
 
 def write_test_prediction(base):
     final = get_prediction_dict(base)
-    path = "test_cases/"
+    path = "predictions/"
     ready = True
     if base == "normal_alg":
         path = path + base + ".json"

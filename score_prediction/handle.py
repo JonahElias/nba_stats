@@ -26,14 +26,15 @@ def write_prediction(team_one, team_two):
     date = get_date(d)
     final["GROUP_SET"] = dataset
     final["DATE"] = date
+    final["VARIABLE"] = "normal_alg"
     for x in team_one:
         final[x.upper()] = team_one[x]
     for x in team_two:
         final[x.upper()] = team_two[x]
-    DataReader().write_data(final, "prediction.json")
+    DataReader().write_data(final, "predictions/normal_alg.json")
 
 
-def read_prediction(file="prediction.json"):
+def read_prediction(file="predictions/normal_alg.json"):
     dic = DataReader().read_data(file)
     for i in dic:
         print(i + " = " + str(dic[i]))

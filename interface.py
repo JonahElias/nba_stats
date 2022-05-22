@@ -6,11 +6,18 @@ from score_prediction import predict_score, handle
 
 class Interface:
 
-    def run(self, c=""):
+    def __init__(self, cmds=[]):
+        self.cmds = cmds
+        self.processed = False
+
+    def run(self):
         while True:
             print()
-            if c != "":
-                self.process_cmd(c)
+            if self.cmds != [] and self.processed == False:
+                for i in self.cmds:
+                    self.process_cmd(i)
+                self.processed = True
+
             else:
                 cmd = input("enter command (enter 'help' to view list of commands): ")
                 self.process_cmd(cmd)
